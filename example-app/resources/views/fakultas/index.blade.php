@@ -34,4 +34,13 @@
                 </div>
               </div>
             </div>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script>
+              Swal.fire({
+                title: "Good job!",
+                text: "You clicked the button!",
+               icon: "success"
+              });
+            </script>
+
 @endsection
