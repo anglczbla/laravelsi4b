@@ -22,11 +22,8 @@ class MahasiswaController extends Controller
             $table->string('tempat_lahir',45);
             $table->date('tanggal_lahir');
             $table->string('alamat');
-            $table->foreignId('prodi_id')
-            ->constrained(); //relasi ke kolom id pada tabel prodis
             $table->unsignedBigInteger('prodi_id');
             $table->foreign('prodi_id')->references('id')->on('prodis');
-
             $table->string('url_foto');
             $table->timestamps();
             
@@ -35,7 +32,12 @@ class MahasiswaController extends Controller
  }
     public function index()
     {
-        //
+        
+        $mahasiswa = Mahasiswa::all(); // select *from fakultas
+        return view('mahasiswa.index')
+                ->with('mahasiswa', $mahasiswa);
+
+
     }
 
     /**
@@ -43,7 +45,7 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        //
+        return view('mahasiswa.create');
     }
 
     /**
@@ -51,7 +53,21 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $val = $request->validate([
+            'nama' => "required",
+            'npm' => "required|unique:mahasiswas",
+            'tempat_lahir'=> "required",
+            'tanggal_lahir'=> "required",
+            'alamat'=> "required",
+            'prodi_id'=> "required",
+            'url_foto'=> "required"
+
+        ]);
+    
+
+    Mahasiswa::create($val);
+
+    return redirect()->route('mahasiswa.index')->with('success', $val['nama'].' berhasil disimpan');
     }
 
     /**
