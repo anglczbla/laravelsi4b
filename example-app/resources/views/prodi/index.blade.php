@@ -16,14 +16,14 @@
                     <table class="table">
                       <thead>
                         <tr>
-                          <th>Nama Prodi</th>
+                          <th>Nama Program Studi</th>
                           <th>Singkatan</th>
                         </tr>
                       </thead>
                       <tbody>
                          @foreach ($prodi as $value)
                             <tr> 
-                                <td>{{ $value["nama"] }}</td>
+                                <td>{{ $value["Nama Program Studi"] }}</td>
                                 <td>{{ $value["singkatan"] }} </td>
                             </tr>
                         @endforeach 

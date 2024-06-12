@@ -22,15 +22,26 @@ class ProdiController extends Controller
      */
     public function create()
     {
-        //
+         return view('prodi.create');
     }
+    $fakultas = fakultas::all();
+    return view('prodi.create')->with('fakultas', $fakultas);
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+         $val = $request->validate([
+            'nama' => "required|unique:fakultas",
+            'singkatan' => "required|max:4"
+            'fakultas_id' => "required"
+        ]);
+    
+
+    Prodi::create($val);
+    
+    return redirect()->route('prodi.index')->with('success', $val['nama'].' berhasil disimpan');
     }
 
     /**
