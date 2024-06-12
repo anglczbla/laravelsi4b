@@ -34,6 +34,7 @@
                 </div>
               </div>
             </div>
+<<<<<<< HEAD
 @if (@session('success'))  
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
@@ -46,3 +47,15 @@
 @endif
 
 @endsection
+=======
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script>
+              Swal.fire({
+                title: "Good job!",
+                text: "You clicked the button!",
+               icon: "success"
+              });
+            </script>
+
+@endsection
+>>>>>>> 9bc1e05f6068226adacc9d041858fc48f1880447

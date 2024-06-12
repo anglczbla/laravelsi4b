@@ -3,14 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mahasiswa;
+<<<<<<< HEAD
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Http\Request;
 
+=======
+use App\Models\Prodi;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+>>>>>>> 9bc1e05f6068226adacc9d041858fc48f1880447
 class MahasiswaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+<<<<<<< HEAD
 
      public function up():void
      {
@@ -38,6 +45,14 @@ class MahasiswaController extends Controller
                 ->with('mahasiswa', $mahasiswa);
 
 
+=======
+    public function index()
+    {
+        $mahasiswa = Mahasiswa::all();
+        return view('mahasiswa.index')
+                ->with('mahasiswa', $mahasiswa);
+
+>>>>>>> 9bc1e05f6068226adacc9d041858fc48f1880447
     }
 
     /**
@@ -45,7 +60,12 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
+<<<<<<< HEAD
         return view('mahasiswa.create');
+=======
+        $prodi = Prodi::all();
+        return view('mahasiswa.create')->with('prodi',$prodi);
+>>>>>>> 9bc1e05f6068226adacc9d041858fc48f1880447
     }
 
     /**
@@ -53,6 +73,7 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
+<<<<<<< HEAD
         $val = $request->validate([
             'nama' => "required|unique:mahasiswa",
             'singkatan' => "required|max:4"
@@ -62,6 +83,32 @@ class MahasiswaController extends Controller
     Mahasiswa::create($val);
 
     return redirect()->route('mahasiswa.index')->with('success', $val['nama'].' berhasil disimpan');
+=======
+        // return $request;
+
+        $val = $request->validate([
+           'npm' => "required|max:10", 
+            'nama' => "required",
+            'tempat_lahir' => "required", 
+            'tanggal_lahir' => "required", 
+            'alamat' => "required", 
+            'prodi_id' => "required",
+            'url_foto' => "required|file|mimes:png,jpg|max:5000" // untuk foto
+        ]);
+
+        // extensi file yang di aploud
+        $ext = $request->url_foto->getClientOriginalExtension();
+        // rename misal: npm.extensi 2226240001.png
+        $val['url_foto'] = $request->npm.".".$ext;
+        // upload ke dalam folder public/foto
+        $request->url_foto->move('foto', $val['url_foto']);
+
+        // simpan tabel fakultas
+        Mahasiswa::create($val);
+
+        // // radirect ke halaman list fakultas
+        return redirect()->route('mahasiswa.index')->with('success', $val['nama']. 'berhasil disimpan');
+>>>>>>> 9bc1e05f6068226adacc9d041858fc48f1880447
     }
 
     /**
@@ -77,7 +124,14 @@ class MahasiswaController extends Controller
      */
     public function edit(Mahasiswa $mahasiswa)
     {
+<<<<<<< HEAD
         //
+=======
+        $prodi = Prodi::all();
+        return view('mahasiswa.edit')
+        ->with('prodi',$prodi)
+        ->with('mahasiswa', $mahasiswa);
+>>>>>>> 9bc1e05f6068226adacc9d041858fc48f1880447
     }
 
     /**
@@ -85,15 +139,68 @@ class MahasiswaController extends Controller
      */
     public function update(Request $request, Mahasiswa $mahasiswa)
     {
+<<<<<<< HEAD
         //
     }
 
+=======
+       // dd($mahasiswa);
+
+       if($request->url_foto) {
+
+        $val = $request->validate([
+        //'npm' => "required|max:10", 
+            'nama' => "required",
+            'tempat_lahir' => "required", 
+            'tanggal_lahir' => "required", 
+            'alamat' => "required", 
+            'prodi_id' => "required",
+            'url_foto' => "required|file|mimes:png,jpg|max:5000" // untuk foto
+       ]);
+    
+
+         // extensi file yang di aploud
+        $ext = $request->url_foto->getClientOriginalExtension();
+        // rename misal: npm.extensi 2226240001.png
+        $val['url_foto'] = $request->npm.".".$ext;
+        // upload ke dalam folder public/foto
+        $request->url_foto->move('foto', $val['url_foto']);
+
+        } else{ 
+             $val = $request->validate([
+            //'npm' => "required|max:10", 
+            'nama' => "required",
+            'tempat_lahir' => "required", 
+            'tanggal_lahir' => "required", 
+            'alamat' => "required", 
+            'prodi_id' => "required",
+            'url_foto' => "required|file|mimes:png,jpg|max:5000" // untuk foto
+        ]);
+    }
+
+        // simpan tabel fakultas
+        Mahasiswa::where('id', $mahasiswa ['id'])->update($val);
+
+        // // radirect ke halaman list fakultas
+        return redirect()->route('mahasiswa.index')->with('success', $val['nama']. 'berhasil disimpan');
+    }
+
+    
+
+>>>>>>> 9bc1e05f6068226adacc9d041858fc48f1880447
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Mahasiswa $mahasiswa)
     {
+<<<<<<< HEAD
         //
+=======
+        //dd($mahasiswa);
+        File::delete('foto/'. $mahasiswa['url_foto']);
+        $mahasiswa->delete();
+        return redirect()->route('mahasiswa.index')->with('success','Data berhasil dihapus.');
+>>>>>>> 9bc1e05f6068226adacc9d041858fc48f1880447
     }
 }
 
