@@ -3,22 +3,17 @@
 @section('title','Fakultas')
 
 @section('content')
-    {{-- <h1>UMDP</h1>
-    <h2>Fakultas</h2>
-    <ul>
-    @foreach ($fakultas as $item)
-        <li>{{$item ["nama"]}}{{$item["singkatan"]}}</li>
-    @endforeach --}}
-    </ul>
     <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Fakultas</h4>
                   <p class="card-description">
-                    Add class <code>list data Fakultas</code>
+                   list data Fakultas
                   </p>
                   {{-- {{tombol tambah}} --}}
-                  <a href="{{route('fakultas.create')}}" class="btn btn-rounded btn-primary">Tambah</a>
+                  @can('create', App\Fakultas::class)
+                       <a href="{{route('fakultas.create')}}" class="btn btn-rounded btn-primary">Tambah</a>
+                  @endcan
                   <div class="table-responsive">
                     <table class="table">
                       <thead>

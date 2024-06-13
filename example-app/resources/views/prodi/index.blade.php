@@ -11,7 +11,9 @@
                   <h4 class="card-title">Prodi</h4>
                   <p class="card-description">
                     List Data Prodi
-                    <a href="{{route('prodi.create')}}" class="btn btn-rounded btn-primary">Tambah</a>
+                     @can('create', App\Prodi::class)
+                       <a href="{{route('prodi.create')}}" class="btn btn-rounded btn-primary">Tambah</a>
+                  @endcan
                   </p>
                   <div class="table-responsive">
                     <table class="table">
@@ -19,15 +21,16 @@
                         <tr>
                           <th>Nama Program Studi</th>
                           <th>Singkatan</th>
+                          <th>Fakultas</th>
                         </tr>
                       </thead>
                       <tbody>
                          @foreach ($prodi as $value)
                             <tr> 
-                                <td>{{ $value["Nama Program Studi"] }}</td>
+                                <td>{{ $value["nama"] }}</td>
                                 <td>{{ $value["singkatan"] }} </td>
-                                <td>
-                                  {{ $value["fakultas"]["nama"]}}
+                                <td> {{ $value["fakultas"]["nama"]}}
+
                                 </td>
                             </tr>
                         @endforeach 
