@@ -1,6 +1,5 @@
 @extends('layout.main')
 
-<<<<<<< HEAD
 @section('title','Prodi')
 
 @section('content')
@@ -50,7 +49,6 @@
       </div>
 </div>
 @endsection
-=======
 @section('title',' Tambah Program Studi')
 
 @section('content')
@@ -103,4 +101,3 @@
 
 </div>
 @endsection 
->>>>>>> 9bc1e05f6068226adacc9d041858fc48f1880447
